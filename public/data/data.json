@@ -1,0 +1,40 @@
+[
+  {
+    "id": "thread-001",
+    "title": "Quantum Computing Fundamentals",
+    "create_time": 1720000000,
+    "messages": [
+      {
+        "id": "msg-1",
+        "sender": "human",
+        "message": "Can you explain quantum superposition using a coin analogy?",
+        "create_time": 1720000005
+      },
+      {
+        "id": "msg-2",
+        "sender": "grok",
+        "message": "Imagine a coin spinning rapidly on a tabletop. While spinning, it isn't strictly heads or tails; it exists in a blur representing a combination of both states until it stops and is observed.",
+        "create_time": 1720000010
+      }
+    ]
+  },
+  {
+    "id": "thread-002",
+    "title": "Audio Synthesis Basics",
+    "create_time": 1720100000,
+    "messages": [
+      {
+        "id": "msg-3",
+        "sender": "human",
+        "message": "What is the difference between additive and subtractive synthesis?",
+        "create_time": 1720100005
+      },
+      {
+        "id": "msg-4",
+        "sender": "grok",
+        "message": "**Subtractive synthesis** starts with a harmonically rich waveform (like a sawtooth) and cuts frequencies using filters. **Additive synthesis** stacks pure sine waves to construct a timbre from scratch.",
+        "create_time": 1720100012
+      }
+    ]
+  }
+]

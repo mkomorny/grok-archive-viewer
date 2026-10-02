@@ -1,0 +1,406 @@
+:root {
+  --bg-main: #000000;
+  --bg-sidebar: #16181c;
+  --bg-hover: #202327;
+  --bg-bubble-user: #2f3336;
+  
+  --text-primary: #e7e9ea;
+  --text-secondary: #71767b;
+  
+  --border-color: #2f3336;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  height: 100vh;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+/* Export Selector Modal */
+.export-selector {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.export-modal {
+  background-color: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px;
+  width: 450px;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.export-modal h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.export-modal p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.export-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.export-item {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.export-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.export-item-icon {
+  margin-right: 15px;
+  color: var(--text-secondary);
+}
+
+.export-help {
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Main App Layout */
+#app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 15px;
+}
+
+.new-chat-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.new-chat-btn:hover {
+  background-color: var(--bg-hover);
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 10px 10px 10px;
+}
+
+.conversation-item {
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 2px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.conversation-item.active {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Main Content */
+#main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+#chat-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#current-chat-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+#chat-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0 30px 0;
+  scroll-behavior: smooth;
+  align-items: center;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+}
+
+.grok-splash-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Messages */
+.message-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.message {
+  width: 100%;
+  max-width: 768px;
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* User Message */
+.message-wrapper.human {
+  justify-content: center;
+}
+
+.message-wrapper.human .message {
+  justify-content: flex-end;
+}
+
+.message.human .message-content {
+  background-color: var(--bg-bubble-user);
+  padding: 12px 16px;
+  border-radius: 20px;
+  border-bottom-right-radius: 4px;
+  max-width: 80%;
+  color: var(--text-primary);
+}
+
+/* Assistant Message */
+.message-wrapper.assistant {
+  justify-content: center;
+}
+
+.message.assistant {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.grok-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.grok-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.message.assistant .message-content {
+  padding: 8px 0;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.message-content {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.message-content p {
+  margin-bottom: 1em;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Markdown Styles */
+.message-content pre {
+  background-color: var(--bg-sidebar);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+}
+
+.message-content code {
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 0.9em;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.message-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.message-content a {
+  color: #1d9bf0;
+  text-decoration: none;
+}
+
+.message-content a:hover {
+  text-decoration: underline;
+}
+
+/* Thinking Steps */
+.thinking-steps {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.thinking-steps-summary {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-secondary);
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 16px;
+  transition: background-color 0.2s;
+}
+
+.thinking-steps-summary:hover {
+  background-color: var(--bg-hover);
+}
+
+.thinking-steps-summary::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid currentColor;
+  margin-right: 8px;
+  transition: transform 0.2s;
+}
+
+details[open] .thinking-steps-summary::before {
+  transform: rotate(90deg);
+}
+
+.thinking-steps ul {
+  list-style-type: none;
+  margin-top: 10px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border-color);
+}
+
+.thinking-steps li {
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b535d;
+}
