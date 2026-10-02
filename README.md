@@ -27,3 +27,7 @@ An offline, privacy-first desktop application for browsing and reading local Gro
 ## Instructions
 
 See [INSTRUCTIONS.md](./INSTRUCTIONS.md) for how to load your Grok data and run the viewer.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0) - see the [LICENSE](./LICENSE) file for details.
